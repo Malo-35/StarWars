@@ -1,0 +1,28 @@
+<header>
+    <div class="panel padding-10 bg-primary">
+        <div class="row">
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <img [src]="currentImage" class="img-fluid" style="max-width: 100%; height: auto; object-fit: cover;" alt="Image centrée">
+            </div>            
+            <!-- <div class="col-2 d-flex justify-content-center"><img [src]="currentImage" class="img-fluid" /></div> -->
+            <div class="col-8">
+                <div>
+                    <h1 class="title d-flex justify-content-center">Bienvenu sur le site non officiel de Star Wars !</h1>
+                </div>
+                <div class="row">
+                    <div class="col-3 d-flex justify-content-center"><a routerLink="/accueil" routerLinkActive="gras">Accueil</a></div>
+                    <div class="col-3 d-flex justify-content-center"><a routerLink="/personnages" routerLinkActive="gras">Les Personnages</a></div>
+                    <div class="col-3 d-flex justify-content-center"><a routerLink="/planetes" routerLinkActive="gras">Les Planètes</a></div>
+                    <div class="col-3 d-flex justify-content-center"><a routerLink="/vaisseaux" routerLinkActive="gras">Les vaisseaux</a></div>
+                </div>
+            </div>
+            <div class="col-2 d-flex justify-content-center align-items-center"><a routerLink="/a-propos" routerLinkActive="gras">À propos</a></div>
+        </div>
+    </div>
+    <div class="row">
+        @for(person of mylisttest; track person){
+            <div>{{person.name}}</div>
+            <p>Coucou</p>
+        }
+    </div>
+</header>

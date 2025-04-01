@@ -6,6 +6,7 @@ import { VaisseauxComponent } from './vaisseaux/vaisseaux.component';
 import { AProposComponent } from './a-propos/a-propos.component';
 
 export const routes: Routes = [
+    {path:'', pathMatch:'full', redirectTo:'/accueil'},
     {path:'accueil', component: AccueilComponent},
     {path:'personnages', component: PersonnagesComponent},
     {path:'planetes', component: PlanetesComponent},

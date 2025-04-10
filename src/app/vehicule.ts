@@ -1,4 +1,4 @@
-export interface Vaisseaux {
+export interface Vehicule {
     name: string;
     model: string;
     manufacturer: string;
@@ -9,9 +9,7 @@ export interface Vaisseaux {
     passenger: number;
     cargo_capacity: number;
     consumables: string;
-    hyperdrive_rating: number;
-    MGLT: number;
-    starship_class: string;
+    vehicle_class: string;
     pilots?: string[];
     films?: string[];
     created: string;

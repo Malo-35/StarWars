@@ -11,15 +11,25 @@ import { ApiserviceService } from '../apiservice.service';
 export class PersonnagesComponent {
   commServ = inject(CommunicationService)   //Nécessaire à l'intallation des communications entre cette app et le header.
   
-  myapiservice = inject(ApiserviceService)
-  mylisttest = <any>[]
+  //Le nécessaire à l'utilisation de l'api et des données reçuent.
+  myapiservice = inject(ApiserviceService)  //De quoi appeler les fonctions d'intéraction avec l'API
+  mylisttest = <any>[]                      //Stocker les valeures reçuent
+  totaldepages:number = 1
+  pageactuelle:number = 1
     
 
   ngOnInit(){
     this.commServ.pushMessage("/personnageIcon.png")    //On envoie dans le channel quelle image afficher dans le header.
     
-    //Je récupère des data de personnages (l'API me limite à 10 personnages par appel)
-    this.myapiservice.getPersonnages().subscribe(
+    //Je récupère des data de personnages
+    this.myapiservice.getPersonnages(1).subscribe(
+      (data) => this.mylisttest = data
+    )
+  }
+
+  testclick(page:number){
+    console.log("Testclick : " + page)
+    this.myapiservice.getPersonnages(page).subscribe(
       (data) => this.mylisttest = data
     )
   }

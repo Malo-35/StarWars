@@ -4,6 +4,7 @@ import { PersonnagesComponent } from './personnages/personnages.component';
 import { PlanetesComponent } from './planetes/planetes.component';
 import { VaisseauxComponent } from './vaisseaux/vaisseaux.component';
 import { AProposComponent } from './a-propos/a-propos.component';
+import { FormulaireRechercheComponent } from './formulaire-recherche/formulaire-recherche.component';
 
 export const routes: Routes = [
     {path:'', pathMatch:'full', redirectTo:'/accueil'},
@@ -12,4 +13,5 @@ export const routes: Routes = [
     {path:'planetes', component: PlanetesComponent},
     {path:'vaisseaux', component: VaisseauxComponent},
     {path:'a-propos', component: AProposComponent},
+    {path:'formulaire-recherche', component: FormulaireRechercheComponent},
 ];

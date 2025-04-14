@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
 import { Personnage } from './personnage';
+import { Planete } from './planete';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,19 @@ export class ApiserviceService {
     return this.httpclient.get<any>('/api')
   }
 
-  getPersonnages(): Observable<Personnage[]>{
-    return this.httpclient.get<any>('/api/people').pipe(
+  getPersonnages(page: number): Observable<Personnage[]>{
+    console.log("getPersonnages("+page+")")
+    return this.httpclient.get<any>('/api/people?page=1&limit=20').pipe(  //Ici j'ai ajouté que je voulais la première page du décou-page par 20 éléments par pages
+      tap(data => console.log("Data brute : ", data)),
+      map((data:any) => data.results),
+      tap(data => console.log(data)),
+    )
+  }
+
+  //getPagePersonnages(page: number): Observable
+
+  getPlanetes(): Observable<Planete[]>{
+    return this.httpclient.get<any>('/api/planet').pipe(
       tap(data => console.log("Data brute : ", data)),
       map((data:any) => data.results),
       tap(data => console.log(data)),

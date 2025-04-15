@@ -1,0 +1,8 @@
+- Problème de non sauvegarde de l'image de la catégorie actuelle lors de l'actualisation de la page.
+- Problème d'accès à l'API qui a engendrer une guerre sans précédent entre le professeur, l'API et le programme de près de 30 minutes.
+- Une fois les requêtes possibles je me suis attelé à créer le programme pour les utiliser. Après beaucoup de débats intérieurs, j'en suis venu à la conclusion que chaque type de données doit être traité comme des données strictements disctinctes, me forçant à faire trois types de datas différentes (forshadowing...) et à créer (seulement ?) trois fois les même fonctions mais calibré pour traiter un type de donné spécifique !
+- Problème de capacité de requêtes personnalisées à l'API. En effet, en allant sur swapi.tech et non pas swapi.dev j'ai observé une fonctionnalité fort sympathique qui était de donner le nombre d'éléments par page souhaité ainsi que la page voulue... Ce qui n'est pas possible avec l'API choisie originalement.
+- J'ai remarqué qu'il y a plus que les trois types de données du début : Personnages, Planètes et Vaisseaux (Spatiaux). Il y a aussi les données des Véhicules (Planétaires), les Espèces et les Films...
+Ainsi j'ai du refaire tout le même cirque que pour les trois premières...
+- Un problème du volume de ma musique que vous écoutiez actuellement. Je peux vous assurer que mes thympans s'en souviennent... >:(
+- 

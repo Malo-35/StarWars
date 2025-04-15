@@ -1,0 +1,49 @@
+.star-wars-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Par défaut sans fond noir */
+    background: none;
+    transition: background-color 0.5s ease;
+  }
+  
+  .star-wars-container.active {
+    background: black; /* Fond noir quand showCrawl == true */
+  }
+  
+  
+  .star-wars {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+    color: yellow;
+    font-family: 'Arial', sans-serif;
+    perspective: 400px;
+    text-align: center;
+  }
+  
+  .crawl {
+    position: absolute;
+    bottom: -100px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    animation: crawl 60s linear forwards;
+  }
+  
+  @keyframes crawl {
+    0% {
+      transform: rotateX(25deg) translateZ(0) translateY(100%);
+    }
+    100% {
+      transform: rotateX(25deg) translateZ(-300px) translateY(-500%);
+    }
+  }
+  
+  pre {
+    white-space: pre-wrap;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  

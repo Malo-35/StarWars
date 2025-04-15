@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommunicationService } from '../communication.service';
+import { StarWarsTextComponent } from "../star-wars-text/star-wars-text.component";
 
 @Component({
   selector: 'app-a-propos',
-  imports: [],
+  imports: [StarWarsTextComponent],
   templateUrl: './a-propos.component.html',
   styleUrl: './a-propos.component.css'
 })

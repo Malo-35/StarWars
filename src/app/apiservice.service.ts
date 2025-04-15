@@ -18,7 +18,7 @@ export class ApiserviceService {
 
   getPersonnages(page: number): Observable<Personnage[]>{
     console.log("getPersonnages("+page+")")
-    return this.httpclient.get<any>('/api/people?page=1&limit=20').pipe(  //Ici j'ai ajouté que je voulais la première page du décou-page par 20 éléments par pages
+    return this.httpclient.get<any>('/api/people?page='+page).pipe(  //Ici j'ai ajouté que je voulais la première page du décou-page par 20 éléments par pages
       tap(data => console.log("Data brute : ", data)),
       map((data:any) => data.results),
       tap(data => console.log(data)),

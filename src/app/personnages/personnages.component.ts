@@ -11,9 +11,9 @@ import { ApiserviceService } from '../apiservice.service';
 export class PersonnagesComponent {
   commServ = inject(CommunicationService)   //Nécessaire à l'intallation des communications entre cette app et le header.
   
-  //Le nécessaire à l'utilisation de l'api et des données reçuent.
+  //Le nécessaire à l'utilisation de l'api et des données reçues.
   myapiservice = inject(ApiserviceService)  //De quoi appeler les fonctions d'intéraction avec l'API
-  mylisttest = <any>[]                      //Stocker les valeures reçuent
+  mylisttest = <any>[]                      //Stocker les valeures reçues
   totaldepages:number = 1
   pageactuelle:number = 1
     

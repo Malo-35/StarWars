@@ -13,7 +13,7 @@ export class PersonnagesComponent {
   
   //Le nécessaire à l'utilisation de l'api et des données reçues.
   myapiservice = inject(ApiserviceService)  //De quoi appeler les fonctions d'intéraction avec l'API
-  mylisttest = <any>[]                      //Stocker les valeures reçues
+  mylistePersonnage = <any>[]                      //Stocker les valeures reçues
   totaldepages:number = 1
   pageactuelle:number = 1
     
@@ -23,14 +23,14 @@ export class PersonnagesComponent {
     
     //Je récupère des data de personnages
     this.myapiservice.getPersonnages(1).subscribe(
-      (data) => this.mylisttest = data
+      (data) => this.mylistePersonnage = data
     )
   }
 
   testclick(page:number){
     console.log("Testclick : " + page)
     this.myapiservice.getPersonnages(page).subscribe(
-      (data) => this.mylisttest = data
+      (data) => this.mylistePersonnage = data
     )
   }
 }

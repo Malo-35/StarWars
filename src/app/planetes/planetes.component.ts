@@ -20,7 +20,9 @@ export class PlanetesComponent implements OnInit {
   ngOnInit(){
     this.commServ.pushMessage("/planeteIcon.png")   //On envoie dans le channel quelle image afficher dans le header.
 
-    this.myapiservice.getPlanetes()
+    this.myapiservice.getPlanetes(1).subscribe(
+      (data) => this.malisteplanetes = data
+    )
   }
 
 }

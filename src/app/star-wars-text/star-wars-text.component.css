@@ -29,7 +29,7 @@
     bottom: -100px;
     width: 100%;
     transform-origin: 50% 100%;
-    animation: crawl 60s linear forwards;
+    animation: crawl 131s linear forwards;
   }
   
   @keyframes crawl {
@@ -41,9 +41,9 @@
     }
   }
   
-  pre {
+  .pre {
     white-space: pre-wrap;
-    max-width: 600px;
+    max-width: auto;
     margin: 0 auto;
   }
   

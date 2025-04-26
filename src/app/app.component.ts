@@ -8,10 +8,11 @@ import { PersonnagesComponent } from './personnages/personnages.component';
 import { PlanetesComponent } from './planetes/planetes.component';
 import { VaisseauxComponent } from './vaisseaux/vaisseaux.component';
 import { ApiserviceService } from './apiservice.service';
+import { DetailsComponent } from "./details/details.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, DetailsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

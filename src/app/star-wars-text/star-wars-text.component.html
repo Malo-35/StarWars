@@ -1,14 +1,14 @@
 <div class="star-wars-container">
     @if (!showCrawl) {
       <button (click)="lancerIntro()" class="btn btn-warning btn-lg">
-        Tous les problèmes rencontrés...
+        Afficher les quelques problèmes rencontrés.
       </button>
     }
   
     @if (showCrawl) {
       <div class="star-wars">
         <div class="crawl">
-          <pre>{{ texte }}</pre>
+          <h1 class="pre">{{ texte }}</h1>
         </div>
       </div>
     }

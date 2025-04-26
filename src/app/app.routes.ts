@@ -8,6 +8,7 @@ import { FormulaireRechercheComponent } from './formulaire-recherche/formulaire-
 import { FilmComponent } from './film/film.component';
 import { EspeceComponent } from './espece/espece.component';
 import { VehiculeComponent } from './vehicule/vehicule.component';
+import { DetailsComponent } from './details/details.component';
 
 export const routes: Routes = [
     {path:'', pathMatch:'full', redirectTo:'/accueil'},
@@ -20,4 +21,5 @@ export const routes: Routes = [
     {path:'formulaire-recherche', component: FormulaireRechercheComponent},
     {path:'film', component: FilmComponent},
     {path:'espece', component: EspeceComponent},
+    {path:'details', component: DetailsComponent}
 ];

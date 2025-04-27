@@ -1,5 +1,5 @@
 export interface Planete {
-    cquoi: "Planete";
+    cquoi: string;
     name: string;
     rotation_period: number;
     orbital_period: number;

@@ -1,9 +1,14 @@
 <div class="d-flex flex-column min-vh-100">
     <app-header></app-header>
 
-    <div class="flex-grow-1 flex-nowrap">
-        <router-outlet></router-outlet>
-        <app-details></app-details>
+    <div class="flex-grow-1 d-flex flex-row"> <!-- Ajout de 'd-flex flex-row' ici -->
+        <div class="flex-grow-1"> <!-- Partie principale : le contenu du router -->
+            <router-outlet></router-outlet>
+        </div>
+
+        @if(madata){
+            <app-details class="d-flex col-4 justify-content-center"></app-details>
+        }
     </div>
 
     <app-footer></app-footer>

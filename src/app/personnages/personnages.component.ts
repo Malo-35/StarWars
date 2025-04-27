@@ -62,7 +62,7 @@ export class PersonnagesComponent {
   }
 
   clickDetails(monperso: Personnage){
-    console.log("Détail perso cliqué !")
+    console.log("Détail perso cliqué !\n" + monperso.birth_year)
     this.commDetails.pushDetails(monperso)
   }
 

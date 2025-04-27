@@ -1,5 +1,5 @@
 export interface Personnage {
-    cquoi : "Personnage";
+    cquoi: string;
     name: string;
     height: number;
     mass: number;

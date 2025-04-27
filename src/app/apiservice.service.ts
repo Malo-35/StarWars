@@ -20,14 +20,18 @@ export class ApiserviceService {
     return this.httpclient.get<any>('/api')
   }
 
-  getPersonnages(page: number): Observable<Personnage[]>{
+  getPersonnages(page: number): Observable<Personnage[]> {
     console.log("getPersonnages("+page+")")
-    return this.httpclient.get<any>('/api/people?page='+page).pipe(  //Ici j'ai ajouté que je voulais la première page du décou-page par 20 éléments par pages
+    return this.httpclient.get<any>('/api/people?page=' + page).pipe(
       tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
+      map((data: any) => data.results.map((perso: any) => ({
+        ...perso,          // On copie toutes les propriétés originales
+        cquoi: "Personnage" // On ajoute le champ cquoi
+      }))),
       tap(data => console.log(data)),
-    )
+    );
   }
+  
 
   //getPagePersonnages(page: number): Observable
 
@@ -77,7 +81,10 @@ export class ApiserviceService {
   
     // Premier appel vers la page pageApi1
     const appelPage1 = this.httpclient.get<any>(`/api/people?page=${pageApi1}`).pipe(
-      map(data => data.results),
+      map((data: any) => data.results.map((perso: any) => ({
+        ...perso,          // On copie toutes les propriétés originales
+        cquoi: "Personnage" // On ajoute le champ cquoi
+      }))),
       catchError(err => {
         console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
         return of([]); // Renvoie un observable émettant un tableau vide
@@ -86,7 +93,10 @@ export class ApiserviceService {
   
     // Deuxième appel vers la page pageApi2 (qui peut ne pas exister)
     const appelPage2 = this.httpclient.get<any>(`/api/people?page=${pageApi2}`).pipe(
-      map(data => data.results),
+      map((data: any) => data.results.map((perso: any) => ({
+        ...perso,          // On copie toutes les propriétés originales
+        cquoi: "Personnage" // On ajoute le champ cquoi
+      }))),
       catchError(err => {
         console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
         return of([]); // Renvoie un observable émettant un tableau vide

@@ -1,5 +1,5 @@
 export interface Vaisseaux {
-    cquoi: "Vaisseaux";
+    cquoi: string;
     name: string;
     model: string;
     manufacturer: string;

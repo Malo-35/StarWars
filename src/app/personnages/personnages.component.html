@@ -11,11 +11,11 @@
 </div>
 
 <!-- Sélecteur de pages -->
-<div class="page-selector">
+<div class="page-selector d-flex justify-content-center">
     @for(page of pagesArray; track page){
         <!-- La classe "active" peut être gérée via une notation conditionnelle en fonction de ton moteur de template.
              Ci-dessous un exemple : -->
-        <button (click)="clickPage(page)" class="@{page == pageactuelle ? 'active' : ''}">
+        <button (click)="clickPage(page)" class="btn {{ page === pageactuelle ? 'btn-primary active' : '' }}">
             {{ page }}
         </button>
     }

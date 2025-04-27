@@ -14,7 +14,7 @@ export class DetailsComponent implements OnInit {
   madatatype: any
   ngOnInit(): void {
     this.commDetails.onDetails().subscribe(
-      (data) => this.madata = data,
+      (data) => this.madata = data
     )
 
     console.log("Détails créé")

@@ -1,5 +1,5 @@
 export interface Vehicule {
-    cquoi: "Vehicule";
+    cquoi: string;
     name: string;
     model: string;
     manufacturer: string;

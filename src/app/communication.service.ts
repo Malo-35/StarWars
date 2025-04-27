@@ -35,6 +35,7 @@ export class CommunicationService {
   //Cette section-ci est réservée à la communication des détails.
   //Il y est transmit les données de l'objet à afficher sous format html.
   pushDetails(sujet:any) {
+    //console.log("Envoit de la donnée suivante :\ncquoi : "+sujet.cquoi+"\nObjet complet : "+sujet)
     this.detailsSubject.next(sujet);
   }
 

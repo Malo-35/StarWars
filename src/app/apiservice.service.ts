@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, Subject, tap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, Subject, tap } from 'rxjs';
 import { Personnage } from './personnage';
 import { Planete } from './planete';
 import { Vaisseaux } from './vaisseaux';
@@ -32,7 +32,7 @@ export class ApiserviceService {
   //getPagePersonnages(page: number): Observable
 
   getPlanetes(page: number): Observable<Planete[]>{
-    return this.httpclient.get<any>('/api/planet?page='+page).pipe(
+    return this.httpclient.get<any>('/api/planets?page='+page).pipe(
       tap(data => console.log("Data brute : ", data)),
       map((data:any) => data.results),
       tap(data => console.log(data)),
@@ -70,4 +70,38 @@ export class ApiserviceService {
       tap(data => console.log(data)),
     )
   }
+
+  getPersonnagesByDisplayPage(pageAffichage: number): Observable<Personnage[]> {
+    const pageApi1 = (pageAffichage * 2) - 1;
+    const pageApi2 = pageAffichage * 2;
+  
+    // Premier appel vers la page pageApi1
+    const appelPage1 = this.httpclient.get<any>(`/api/people?page=${pageApi1}`).pipe(
+      map(data => data.results),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]); // Renvoie un observable émettant un tableau vide
+      })
+    );
+  
+    // Deuxième appel vers la page pageApi2 (qui peut ne pas exister)
+    const appelPage2 = this.httpclient.get<any>(`/api/people?page=${pageApi2}`).pipe(
+      map(data => data.results),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]); // Renvoie un observable émettant un tableau vide
+      })
+    );
+  
+    // Lancer les deux appels en parallèle et fusionner les résultats
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
+  }
+
+  getPersonnagesPage(page: number = 1): Observable<any> {
+    // On ne fait pas de mapping ici afin d’obtenir l’objet complet qui contient "count" et "results"
+    return this.httpclient.get<any>('/api/people?page=' + page);
+  }
+  
 }

@@ -1,26 +1,56 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommunicationService } from '../communication.service';
 import { ApiserviceService } from '../apiservice.service';
+import { Espece } from '../espece';
 
 @Component({
   selector: 'app-espece',
-  imports: [],
   templateUrl: './espece.component.html',
-  styleUrl: './espece.component.css'
+  styleUrls: ['./espece.component.css']
 })
-export class EspeceComponent implements OnInit {
-  commServ = inject(CommunicationService)   //Nécessaire à l'intallation des communications entre cette app et le header.
+export class EspeceComponent {
+  commServ = inject(CommunicationService);
+  commDetails = inject(CommunicationService);
+  myapiservice = inject(ApiserviceService);
+  mylisteEspece = <any>[];
 
-  //Le nécessaire à l'utilisation de l'api et des données reçues.
-  myapiservice = inject(ApiserviceService)  //De quoi appeler les fonctions d'intéraction avec l'API
-  listeEspece = <any>[]                      //Stocker les valeures reçues
-  totaldepages:number = 1
-  pageactuelle:number = 1
-  
+  totalCount: number = 0;
+  totalPages: number = 0;
+  pagesArray: number[] = [];
+  pageactuelle: number = 1;
+
   ngOnInit(): void {
-    this.commServ.pushMessage("/chercherespece.png")   //On envoie dans le channel quelle image afficher dans le header.
-    this.myapiservice.getEspeces(1).subscribe(
-      (data) => this.listeEspece = data
-    )
+    this.commServ.pushMessage("/especeIcon.png");
+
+    this.myapiservice.getEspecesPage(1).subscribe(data => {
+      this.totalCount = data.count;
+      const totalApiPages = Math.ceil(this.totalCount / 10);
+      this.totalPages = totalApiPages % 2 === 0 ? totalApiPages / 2 : Math.floor(totalApiPages / 2) + 1;
+      this.pagesArray = Array.from({ length: this.totalPages }, (v, i) => i + 1);
+    });
+
+    this.loadEspeces(this.pageactuelle);
+  }
+
+  loadEspeces(page: number) {
+    this.myapiservice.getEspecesByDisplayPage(page).subscribe(
+      (data) => this.mylisteEspece = data,
+      error => console.error("Erreur lors du chargement des espèces :", error)
+    );
+  }
+
+  clickPage(page: number) {
+    this.pageactuelle = page;
+    this.loadEspeces(page);
+  }
+
+  clickDetails(monEspece: Espece) {
+    console.log("Détail espèce cliqué !\n" + monEspece.name)
+    this.commDetails.pushDetails(monEspece)
+  }
+
+  ngOnDestroy(){
+    this.commDetails.pushDetails(null)
+    console.log("Composant espèces détruit !")
   }
 }

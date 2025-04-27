@@ -9,65 +9,68 @@ import { Personnage } from '../personnage';
   styleUrls: ['./personnages.component.css']
 })
 export class PersonnagesComponent {
-  commServ = inject(CommunicationService);    // Nécessaire à l'installation des communications entre cette app et le header.
-  commDetails = inject(CommunicationService); // Installation de la communiquation des détails.
+  // Injection des services nécessaires
+  commServ = inject(CommunicationService);    // Pour envoyer des messages vers le header (image)
+  commDetails = inject(CommunicationService); // Pour envoyer les détails du personnage sélectionné
   
-  // Le nécessaire à l'utilisation de l'API et des données reçues.
-  myapiservice = inject(ApiserviceService);     // De quoi appeler les fonctions d'interaction avec l'API.
-  mylistePersonnage = <any>[];                   // Stocker les valeurs reçues.
+  myapiservice = inject(ApiserviceService);   // Service pour interagir avec l'API
+  mylistePersonnage = <any>[];                 // Tableau pour stocker la liste des personnages reçus
+  
+  // Variables pour la pagination
+  totalCount: number = 0;                      // Nombre total de personnages disponibles dans l'API
+  totalPages: number = 0;                      // Nombre total de pages disponibles (20 pers/page)
+  pagesArray: number[] = [];                   // Tableau des numéros de pages pour le sélecteur
+  
+  pageactuelle: number = 1;                     // Page actuellement affichée
 
-  // Pour la pagination
-  totalCount: number = 0;                        // Stocke le nombre total d'éléments tel que fourni par l'API.
-  totalPages: number = 0;                        // Nombre total de pages d'affichage (20 objets par page).
-  pagesArray: number[] = [];                     // Tableau des numéros de pages pour le sélecteur.
-
-  pageactuelle: number = 1;                      // Page actuellement affichée.
-
+  // Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
-    this.commServ.pushMessage("/personnageIcon.png");    // On envoie dans le channel l'image du header.
-    
+    // Envoie l'image dans le canal du header
+    this.commServ.pushMessage("/personnageIcon.png");    
+
+    // Appel à l'API pour récupérer la première page de personnages
     this.myapiservice.getPersonnagesPage(1).subscribe(data => {
-      this.totalCount = data.count;                         // Nombre total d'enregistrements.
+      this.totalCount = data.count;  // Récupération du nombre total de personnages
+      const totalApiPages = Math.ceil(this.totalCount / 10); // Calcul du nombre total de pages (10 pers/page)
       
-      const totalApiPages = Math.ceil(this.totalCount / 10); // Nombre de pages API (10 pers / page).
-      
+      // Si le nombre de pages API est pair ou impair, ajuster le nombre de pages d'affichage
       if (totalApiPages % 2 === 0) {
-        this.totalPages = totalApiPages / 2;                 // Nombre de pages d'affichage (20 pers / page)
+        this.totalPages = totalApiPages / 2;
       } else {
-        this.totalPages = Math.floor(totalApiPages / 2) + 1; // Si pages API impaires, +1
+        this.totalPages = Math.floor(totalApiPages / 2) + 1;
       }
-  
-      // Création d'un tableau [1,2,...,totalPages]
+
+      // Création d'un tableau des numéros de pages à afficher
       this.pagesArray = Array.from({ length: this.totalPages }, (v, i) => i + 1);
     });
-  
-    // Charger la première page
+
+    // Chargement des personnages pour la première page
     this.loadPersonnages(this.pageactuelle);
   }
-  
 
-  // Méthode pour charger les données fusionnées des personnages selon la page d'affichage
+  // Méthode pour charger les personnages pour la page donnée
   loadPersonnages(page: number) {
     this.myapiservice.getPersonnagesByDisplayPage(page).subscribe(
-      (data) => this.mylistePersonnage = data,
-      error => console.error("Erreur lors du chargement des personnages :", error)
+      (data) => this.mylistePersonnage = data, // Remplissage de la liste de personnages
+      error => console.error("Erreur lors du chargement des personnages :", error) // Gestion des erreurs
     );
   }
 
-  // Méthode appelée lors du click sur un numéro de page dans le sélecteur
+  // Méthode appelée lors du clic sur un numéro de page dans le sélecteur de pages
   clickPage(page: number) {
-    //console.log("Testclick : " + page);
-    this.pageactuelle = page;
-    this.loadPersonnages(page);
+    this.pageactuelle = page;        // Mise à jour de la page actuellement affichée
+    this.loadPersonnages(page);      // Chargement des personnages pour cette page
   }
 
+  // Méthode appelée lors du clic sur un personnage pour afficher ses détails
   clickDetails(monperso: Personnage){
-    console.log("Détail perso cliqué !\n" + monperso.birth_year)
-    this.commDetails.pushDetails(monperso)
+    console.log("Détail perso cliqué !\n" + monperso.birth_year);
+    this.commDetails.pushDetails(monperso);  // Envoi des détails du personnage au canal
   }
 
+  // Méthode appelée lorsque le composant est détruit
   ngOnDestroy(){
-    this.commDetails.pushDetails(null)
-    console.log("Composant personnages détruit !")
+    this.commDetails.pushDetails(null);  // Envoi d'un message vide pour réinitialiser les détails
+    console.log("Composant personnages détruit !");
   }
 }

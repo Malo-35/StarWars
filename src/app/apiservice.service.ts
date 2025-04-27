@@ -12,106 +12,250 @@ import { Film } from './film';
   providedIn: 'root'
 })
 export class ApiserviceService {
-  protected subject:Subject<string>= new Subject()
-  httpclient = inject(HttpClient);
+  protected subject: Subject<string> = new Subject();
+  httpclient = inject(HttpClient); // Injection du HttpClient pour faire des requêtes API.
+
   constructor() { }
 
-  getAll(): Observable<any>{
-    return this.httpclient.get<any>('/api')
+  // --------------------------
+  // Fonctions générales (raw)
+  // --------------------------
+
+  // Récupère toutes les données de base depuis l'API.
+  getAll(): Observable<any> {
+    return this.httpclient.get<any>('/api');
   }
 
-  getPersonnages(page: number): Observable<Personnage[]> {
-    console.log("getPersonnages("+page+")")
-    return this.httpclient.get<any>('/api/people?page=' + page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data: any) => data.results.map((perso: any) => ({
-        ...perso,          // On copie toutes les propriétés originales
-        cquoi: "Personnage" // On ajoute le champ cquoi
-      }))),
-      tap(data => console.log(data)),
-    );
-  }
+  // Les fonctions get[Composant]Page renvoient l'objet complet (contenant "count" et "results")
   
-
-  //getPagePersonnages(page: number): Observable
-
-  getPlanetes(page: number): Observable<Planete[]>{
-    return this.httpclient.get<any>('/api/planets?page='+page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
-      tap(data => console.log(data)),
-    )
+  // Personnages : Retourne l'objet complet pour la page donnée.
+  getPersonnagesPage(page: number = 1): Observable<any> {
+    // On ne fait pas de mapping ici afin d’obtenir l’objet complet (count et results)
+    return this.httpclient.get<any>(`/api/people?page=${page}`);
   }
 
-  getVaisseaux(page: number): Observable<Vaisseaux[]>{
-    return this.httpclient.get<any>('/api/starship?page='+page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
-      tap(data => console.log(data)),
-    )
+  // Planètes
+  getPlanetesPage(page: number = 1): Observable<any> {
+    return this.httpclient.get<any>(`/api/planets?page=${page}`);
   }
 
-  getVehicules(page: number): Observable<Vehicule[]>{
-    return this.httpclient.get<any>('/api/vehicle?page='+page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
-      tap(data => console.log(data)),
-    )
+  // Vaisseaux
+  getVaisseauxPage(page: number = 1): Observable<any> {
+    return this.httpclient.get<any>(`/api/starships?page=${page}`);
   }
 
-  getEspeces(page: number): Observable<Espece[]>{
-    return this.httpclient.get<any>('/api/species?page='+page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
-      tap(data => console.log(data)),
-    )
+  // Véhicules
+  getVehiculesPage(page: number = 1): Observable<any> {
+    return this.httpclient.get<any>(`/api/vehicles?page=${page}`);
   }
 
-  getFilms(page: number): Observable<Film[]>{
-    return this.httpclient.get<any>('/api/film?page='+page).pipe(
-      tap(data => console.log("Data brute : ", data)),
-      map((data:any) => data.results),
-      tap(data => console.log(data)),
-    )
+  // Espèces
+  getEspecesPage(page: number = 1): Observable<any> {
+    return this.httpclient.get<any>(`/api/species?page=${page}`);
   }
 
+  // Films
+  getFilmsPage(page: number = 1): Observable<any> {
+    return this.httpclient.get<any>(`/api/films?page=${page}`);
+  }
+
+  // --------------------------
+  // Fonctions getByDisplayPage
+  // --------------------------
+  // Ces fonctions combinent deux pages API afin d'obtenir un affichage avec 20 éléments.
+
+  // Personnages
   getPersonnagesByDisplayPage(pageAffichage: number): Observable<Personnage[]> {
-    const pageApi1 = (pageAffichage * 2) - 1;
-    const pageApi2 = pageAffichage * 2;
-  
-    // Premier appel vers la page pageApi1
+    const pageApi1 = (pageAffichage * 2) - 1; // Calcul de la première page
+    const pageApi2 = pageAffichage * 2;       // Calcul de la deuxième page
+
+    // Récupération des données de la première page avec ajout de cquoi
     const appelPage1 = this.httpclient.get<any>(`/api/people?page=${pageApi1}`).pipe(
       map((data: any) => data.results.map((perso: any) => ({
-        ...perso,          // On copie toutes les propriétés originales
-        cquoi: "Personnage" // On ajoute le champ cquoi
+        ...perso,
+        cquoi: "Personnage"
       }))),
       catchError(err => {
         console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
-        return of([]); // Renvoie un observable émettant un tableau vide
+        return of([]);
       })
     );
-  
-    // Deuxième appel vers la page pageApi2 (qui peut ne pas exister)
+
+    // Récupération des données de la deuxième page avec ajout de cquoi
     const appelPage2 = this.httpclient.get<any>(`/api/people?page=${pageApi2}`).pipe(
       map((data: any) => data.results.map((perso: any) => ({
-        ...perso,          // On copie toutes les propriétés originales
-        cquoi: "Personnage" // On ajoute le champ cquoi
+        ...perso,
+        cquoi: "Personnage"
       }))),
       catchError(err => {
         console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
-        return of([]); // Renvoie un observable émettant un tableau vide
+        return of([]);
       })
     );
-  
-    // Lancer les deux appels en parallèle et fusionner les résultats
+
+    // Combinaison des deux pages
     return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
       map(({ page1, page2 }) => [...page1, ...page2])
     );
   }
 
-  getPersonnagesPage(page: number = 1): Observable<any> {
-    // On ne fait pas de mapping ici afin d’obtenir l’objet complet qui contient "count" et "results"
-    return this.httpclient.get<any>('/api/people?page=' + page);
+  // Planètes
+  getPlanetesByDisplayPage(pageAffichage: number): Observable<Planete[]> {
+    const pageApi1 = (pageAffichage * 2) - 1; // Première page
+    const pageApi2 = pageAffichage * 2;       // Deuxième page
+
+    const appelPage1 = this.httpclient.get<any>(`/api/planets?page=${pageApi1}`).pipe(
+      map((data: any) => data.results.map((planete: any) => ({
+        ...planete,
+        cquoi: "Planete"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]);
+      })
+    );
+
+    const appelPage2 = this.httpclient.get<any>(`/api/planets?page=${pageApi2}`).pipe(
+      map((data: any) => data.results.map((planete: any) => ({
+        ...planete,
+        cquoi: "Planete"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]);
+      })
+    );
+
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
   }
-  
+
+  // Vaisseaux
+  getVaisseauxByDisplayPage(pageAffichage: number): Observable<Vaisseaux[]> {
+    const pageApi1 = (pageAffichage * 2) - 1;
+    const pageApi2 = pageAffichage * 2;
+
+    const appelPage1 = this.httpclient.get<any>(`/api/starships?page=${pageApi1}`).pipe(
+      map((data: any) => data.results.map((vaisseau: any) => ({
+        ...vaisseau,
+        cquoi: "Vaisseau"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]);
+      })
+    );
+
+    const appelPage2 = this.httpclient.get<any>(`/api/starships?page=${pageApi2}`).pipe(
+      map((data: any) => data.results.map((vaisseau: any) => ({
+        ...vaisseau,
+        cquoi: "Vaisseau"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]);
+      })
+    );
+
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
+  }
+
+  // Véhicules
+  getVehiculesByDisplayPage(pageAffichage: number): Observable<Vehicule[]> {
+    const pageApi1 = (pageAffichage * 2) - 1;
+    const pageApi2 = pageAffichage * 2;
+
+    const appelPage1 = this.httpclient.get<any>(`/api/vehicles?page=${pageApi1}`).pipe(
+      map((data: any) => data.results.map((vehicule: any) => ({
+        ...vehicule,
+        cquoi: "Vehicule"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]);
+      })
+    );
+
+    const appelPage2 = this.httpclient.get<any>(`/api/vehicles?page=${pageApi2}`).pipe(
+      map((data: any) => data.results.map((vehicule: any) => ({
+        ...vehicule,
+        cquoi: "Vehicule"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]);
+      })
+    );
+
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
+  }
+
+  // Espèces
+  getEspecesByDisplayPage(pageAffichage: number): Observable<Espece[]> {
+    const pageApi1 = (pageAffichage * 2) - 1;
+    const pageApi2 = pageAffichage * 2;
+
+    const appelPage1 = this.httpclient.get<any>(`/api/species?page=${pageApi1}`).pipe(
+      map((data: any) => data.results.map((espece: any) => ({
+        ...espece,
+        cquoi: "Espece"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]);
+      })
+    );
+
+    const appelPage2 = this.httpclient.get<any>(`/api/species?page=${pageApi2}`).pipe(
+      map((data: any) => data.results.map((espece: any) => ({
+        ...espece,
+        cquoi: "Espece"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]);
+      })
+    );
+
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
+  }
+
+  // Films
+  getFilmsByDisplayPage(pageAffichage: number): Observable<Film[]> {
+    const pageApi1 = (pageAffichage * 2) - 1;
+    const pageApi2 = pageAffichage * 2;
+
+    const appelPage1 = this.httpclient.get<any>(`/api/films?page=${pageApi1}`).pipe(
+      map((data: any) => data.results.map((film: any) => ({
+        ...film,
+        cquoi: "Film"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi1}`, err);
+        return of([]);
+      })
+    );
+
+    const appelPage2 = this.httpclient.get<any>(`/api/films?page=${pageApi2}`).pipe(
+      map((data: any) => data.results.map((film: any) => ({
+        ...film,
+        cquoi: "Film"
+      }))),
+      catchError(err => {
+        console.error(`Erreur lors de la récupération de la page ${pageApi2}`, err);
+        return of([]);
+      })
+    );
+
+    return forkJoin({ page1: appelPage1, page2: appelPage2 }).pipe(
+      map(({ page1, page2 }) => [...page1, ...page2])
+    );
+  }
 }

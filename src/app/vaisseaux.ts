@@ -7,7 +7,6 @@ export interface Vaisseaux {
     length: number;
     max_atmosphering_speed: string;
     crew: number;
-    passenger: number;
     cargo_capacity: number;
     consumables: string;
     hyperdrive_rating: number;

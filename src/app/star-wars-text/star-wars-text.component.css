@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     /* Par défaut sans fond noir */
     background: none;
     transition: background-color 0.5s ease;
@@ -17,9 +17,9 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
-    background: black;
+    background-image: url(../../../public/galaxy.png);
     color: yellow;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial Black', sans-serif;
     perspective: 400px;
     text-align: center;
   }
@@ -29,7 +29,7 @@
     bottom: -100px;
     width: 100%;
     transform-origin: 50% 100%;
-    animation: crawl 131s linear forwards;
+    animation: crawl 300s linear forwards;  /*La longueur de la musique est de 131 secondes*/
   }
   
   @keyframes crawl {
@@ -43,7 +43,7 @@
   
   .pre {
     white-space: pre-wrap;
-    max-width: auto;
+    max-width: fit-content;
     margin: 0 auto;
   }
   

@@ -1,14 +1,28 @@
+Il y a une musique de fond, je vous conseille de mettre le son.
+
+Les QUELQUES problème rencontrés :
 - Problème de non sauvegarde de l'image de la catégorie actuelle lors de l'actualisation de la page.
-- Problème d'accès à l'API qui a engendré une guerre sans précédent entre le professeur, l'API et le programme de près de 30 minutes.
+- Problème d'accès à l'API qui a engendré une guerre sans précédent entre le professeur, l'API et le programme de près de 30 minutes. L'API fu vaincu grâce aux capacités et ressources redoutable du professeur.
+
 - Une fois les requêtes possibles je me suis attelé à créer le programme pour les utiliser. Après beaucoup de débats intérieurs, j'en suis venu à la conclusion que chaque type de données doit être traité comme des données strictements disctinctes, me forçant à faire trois types de datas différentes (foreshadowing...) et à créer (seulement ?) trois fois les même fonctions mais calibré pour traiter un type de donné spécifique !
+
 - Problème de capacité de requêtes personnalisées à l'API. En effet, en allant sur swapi.tech et non pas swapi.dev j'ai observé une fonctionnalité fort sympathique qui était de donner le nombre d'éléments par page souhaité ainsi que la page voulue... Ce qui n'est pas possible avec l'API choisie originalement.
+
 - J'ai remarqué qu'il y a plus que les trois types de données du début : Personnages, Planètes et Vaisseaux (Spatiaux). Il y a aussi les données des Véhicules (Planétaires), les Espèces et les Films...
 Ainsi j'ai du refaire tout le même cirque que pour les trois premières...
+
 - Un problème du volume de la musique que vous écoutez actuellement. Je peux vous assurer que mes thympans s'en souviennent... >:(
+
 - COMMENT ÇA MON SITE API EST COMPROMIS !? Oui, swapi.dev a apparement subit une attaque... je n'ai pas le droit d'y accéder avec mon navigateur !
 Fort heureusement, je peux toujours effectuer des requêtes dessus, c'est juste que si je me rate dans la commande, je ne peux pas voir l'orthographe du mot... Je suis dyslexique et dysorthographique !
-Mise à jour, le site est toujours compromis (cela doit être due à mon navigateur)...
+Mise à jour : le site semble toujours être compromis... Cela doit être due à mon navigateur qui ne veux plus que j'aille dessus pour protéger mes données. Mais bon, j'arrive à passer outre.
 
 - Pour l'ajout d'un système de recherche avec un formulaire... Je ne l'ai pas encore fait au moment où j'écrit cette ligne mais je n'arrive toujours pas à bien me décider sur comment l'implanter...
 - Euh... j'en fait quoi de la page d'accueille ? Je n'ai pas 36 000 trucs à dire moi !
+
 - Ayant décidé de laisser l'affichage des détails par un autre composant, j'ai du passer par bien des techniques pour transmettre et afficher les différents types de données possibles. Après 2 heures de bataille, j'ai trouvé la solution pour pouvoir différentier les différents types de données, j'ai ajouté la variable "cquoi" qui renvoie son type de donnée... DU GÉNIE BARBARE !
+
+- Un problème d'affichage des détails : quand j'essayais d'afficher les détails d'un objet / élément, la page des détails s'affichait mais n'affichait rien. Il fallait cliquer une fois pour activer les détails, puis cliquer une seconde fois pour afficher les détails de l'objet.
+- Le bouton qui affichait ce texte prenait, de base, tout l'écran. J'ai dû taper dessus, il est un peu limité maintenant mais il prend moins de place.
+- Vous savez à quel point il est difficile de trouver le fond d'étoiles utilisé dans les génériques de Star Wars ?
+Essayez et vous verrez, c'est donc pour cette raison que j'affirme à plus ou moins contre coeur que le fond utilisé n'est pas l'original (même si je le trouve l'image actuelle meilleure).

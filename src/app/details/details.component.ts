@@ -9,8 +9,8 @@ import { Personnage } from '../personnage';
   styleUrl: './details.component.css'
 })
 export class DetailsComponent implements OnInit {
-  commDetails = inject(CommunicationService)
-  madata: any
+  commDetails = inject(CommunicationService)  //Pour recevoir les données à afficher.
+  madata: any | null=null
   madatatype: any
   ngOnInit(): void {
     this.commDetails.onDetails().subscribe(

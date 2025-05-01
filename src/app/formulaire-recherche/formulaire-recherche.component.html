@@ -1,34 +1,4 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSub()">
-    <div class="col-3 d-flex justify-content-center">
-        <div class="col-4">
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="espece" value="espece"><br>
-                <label for="espece">Espèce</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="film" value="film"><br>
-                <label for="film">Film</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="personnage" value="personnage"><br>
-                <label for="personnage">Personnage</label>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="planete" value="planete"><br>
-                <label for="planete">Planète</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="vaisseaux" value="vaisseaux"><br>
-                <label for="vaisseaux">Vaisseaux</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="vehicule" value="vehicule"><br>
-                <label for="vehicule">Véhicules</label>
-            </div>
-        </div>
-    </div>
     <input [formControl]="searchCtrl">
     <button>Filter</button>
 </form>

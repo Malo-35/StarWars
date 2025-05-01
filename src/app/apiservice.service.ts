@@ -14,18 +14,61 @@ import { Film } from './film';
 export class ApiserviceService {
   protected subject: Subject<string> = new Subject();
   httpclient = inject(HttpClient); // Injection du HttpClient pour faire des requêtes API.
-
+  
   constructor() { }
-
+  
   // --------------------------
   // Fonctions générales (raw)
   // --------------------------
-
+  
   // Récupère toutes les données de base depuis l'API.
   getAll(): Observable<any> {
     return this.httpclient.get<any>('/api');
   }
-
+  
+  //LES FILTRES !!!
+  getEspeceFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/species?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((espece: any) => ({
+        ...espece,
+        cquoi: "Espece"
+      }))))
+  }
+  getFilmFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/films?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((film: any) => ({
+        ...film,
+        cquoi: "Film"
+      }))))
+  }
+  getPersonnageFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/people?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((perso: any) => ({
+        ...perso,
+        cquoi: "Personnage"
+      }))))
+  }
+  getPlaneteFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/planets?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((planetes: any) => ({
+        ...planetes,
+        cquoi: "Planete"
+      }))))
+  }
+  getVaisseauFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/starships?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((vaisseaux: any) => ({
+        ...vaisseaux,
+        cquoi: "Vaisseaux"
+      }))))
+  }
+  getVehiculeFiltre(searchTerm: string): Observable<any> {
+    return this.httpclient.get<any>(`/api/vehicles?search=${searchTerm}`).pipe(
+      map((data: any) => data.results.map((vehicules: any) => ({
+        ...vehicules,
+        cquoi: "Vehicule"
+      }))))
+  }
   // Les fonctions get[Composant]Page renvoient l'objet complet (contenant "count" et "results")
   
   // Personnages : Retourne l'objet complet pour la page donnée.

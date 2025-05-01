@@ -1,4 +1,29 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSub()">
+<form [formGroup]="formGroup">
     <input [formControl]="searchCtrl">
-    <button>Filter</button>
 </form>
+<div class="row">
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Personnage :</h1>
+        <app-personnages></app-personnages>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Espèce :</h1>
+        <app-espece></app-espece>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Film :</h1>
+        <app-film></app-film>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Vaisseau :</h1>
+        <app-vaisseaux></app-vaisseaux>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Véhicule :</h1>
+        <app-vehicule></app-vehicule>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h1 class="w-100">Occurence Planète :</h1>
+        <app-planetes></app-planetes>
+    </div>
+</div>

@@ -27,6 +27,26 @@ export class PlanetesComponent {
   ngOnInit(): void {
     this.commServ.pushMessage("/planeteIcon.png");    // Envoie l'icône dans le header
 
+    // Souscription pour recevoir les filtres du formulaire.
+        this.commServ.onForm().subscribe((searchTerm:string) => {
+          if (searchTerm && searchTerm.trim() !== '') {
+            //Retrait des pages :
+            this.totalCount = 0
+            this.totalPages = 0
+            this.pagesArray = []
+            // Appel de l'API avec le filtre.
+            this.myapiservice.getPlaneteFiltre(searchTerm).subscribe(
+              (data: Planete[]) => {
+                this.mylistePlanete = data;
+              },
+              error => console.error("Erreur lors de la recherche filtrée :", error)
+            );
+          } else {
+            // Si le filtre est vide, rechargez la liste par défaut (page 1 par exemple).
+            this.loadPlanetes(this.pageactuelle);
+          }
+        });
+
     // Appel à l'API pour récupérer la première page de planètes
     this.myapiservice.getPlanetesPage(1).subscribe(data => {
       this.totalCount = data.count;  // Récupération du nombre total de planètes

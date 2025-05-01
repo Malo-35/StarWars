@@ -27,6 +27,26 @@ export class FilmComponent {
   ngOnInit(): void {
     this.commServ.pushMessage("/filmIcon.png");   // Envoie l'icône dans le header
 
+    // Souscription pour recevoir les filtres du formulaire.
+        this.commServ.onForm().subscribe((searchTerm:string) => {
+          if (searchTerm && searchTerm.trim() !== '') {
+            //Retrait des pages :
+            this.totalCount = 0
+            this.totalPages = 0
+            this.pagesArray = []
+            // Appel de l'API avec le filtre.
+            this.myapiservice.getFilmFiltre(searchTerm).subscribe(
+              (data: Film[]) => {
+                this.mylisteFilm = data;
+              },
+              error => console.error("Erreur lors de la recherche filtrée :", error)
+            );
+          } else {
+            // Si le filtre est vide, rechargez la liste par défaut (page 1 par exemple).
+            this.loadFilms(this.pageactuelle);
+          }
+        });
+
     // Appel à l'API pour récupérer la première page de films
     this.myapiservice.getFilmsPage(1).subscribe(data => {
       this.totalCount = data.count;  // Récupération du nombre total de films

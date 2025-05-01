@@ -26,3 +26,6 @@ Mise à jour : le site semble toujours être compromis... Cela doit être due à
 - Le bouton qui affichait ce texte prenait, de base, tout l'écran. J'ai dû taper dessus, il est un peu limité maintenant mais il prend moins de place.
 - Vous savez à quel point il est difficile de trouver le fond d'étoiles utilisé dans les génériques de Star Wars ?
 Essayez et vous verrez, c'est donc pour cette raison que j'affirme à plus ou moins contre coeur que le fond utilisé n'est pas l'original (même si je le trouve l'image actuelle meilleure).
+
+- Impossibilité de revoir la commande pour chercher en appliquant un filtre sur l'API car elle est toujours menacée ! J'ai essayer sur d'autres navigateurs, en vain, avant d'envoyer un espion Chat-GPT pour faire de la récolte d'informations !
+La mise en place du formulaire de recherche est plus complexe que prévus, une fois qu'il ne reste que quelques objets, ces derniers se font écraser par une force inconnue et innarétable... Le stress peut-être ?

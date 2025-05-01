@@ -5,9 +5,10 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunicationService {
-  protected subject:Subject<string>= new Subject()
-  protected communicationDesPages:Subject<number> = new Subject()
+  protected subject:Subject<string>= new Subject();
+  protected communicationDesPages:Subject<number> = new Subject();
   protected detailsSubject: Subject<string> = new Subject();
+  protected formulaire: Subject<string> = new Subject();
 
   constructor() { }
 
@@ -41,5 +42,14 @@ export class CommunicationService {
 
   onDetails(): Observable<string> {
     return this.detailsSubject.asObservable();
+  }
+
+  //Ici je crée le channel pour la recherche globale.
+  pushForm(recherche:string){
+    this.formulaire.next(recherche);
+  }
+  
+  onForm(): Observable<string>{
+    return this.formulaire.asObservable();
   }
 }

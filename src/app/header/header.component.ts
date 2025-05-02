@@ -25,8 +25,9 @@ export class HeaderComponent {
     console.log("Header détruit !?")
   }
 
-  changerIcone(nom: string){
+  //Cette fonction n'est plus utilisé dans le programme.
+  /*changerIcone(nom: string){
     this.currentImage=("/" + nom)
     console.log("Image actuelle : " + this.currentImage)
-  }
+  }*/
 }

@@ -1,4 +1,5 @@
 export interface Film {
+    cquoi: string;
     title: string;
     episode_id: number;
     opening_crawl: string;

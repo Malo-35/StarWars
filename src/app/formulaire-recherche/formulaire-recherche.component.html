@@ -1,34 +1,29 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSub()">
-    <div class="col-3 d-flex justify-content-center">
-        <div class="col-4">
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="espece" value="espece"><br>
-                <label for="espece">Espèce</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="film" value="film"><br>
-                <label for="film">Film</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="personnage" value="personnage"><br>
-                <label for="personnage">Personnage</label>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="planete" value="planete"><br>
-                <label for="planete">Planète</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="vaisseaux" value="vaisseaux"><br>
-                <label for="vaisseaux">Vaisseaux</label>
-            </div>
-            <div class="col-2 d-flex">
-                <input type="radio" name="queltype" id="vehicule" value="vehicule"><br>
-                <label for="vehicule">Véhicules</label>
-            </div>
-        </div>
-    </div>
-    <input [formControl]="searchCtrl">
-    <button>Filter</button>
+<form class="d-flex justify-content-center" [formGroup]="formGroup">
+    <input class="d-flex justify-content-center w-50" [formControl]="searchCtrl">
 </form>
+<div class="row">
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Personnage :</h3>
+        <app-personnages></app-personnages>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Espèce :</h3>
+        <app-espece></app-espece>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Film :</h3>
+        <app-film></app-film>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Vaisseau :</h3>
+        <app-vaisseaux></app-vaisseaux>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Véhicule :</h3>
+        <app-vehicule></app-vehicule>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h3 class="w-100">Occurence Planète :</h3>
+        <app-planetes></app-planetes>
+    </div>
+</div>

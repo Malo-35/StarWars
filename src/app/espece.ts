@@ -1,4 +1,5 @@
 export interface Espece {
+    cquoi: string;
     name: string;
     classification: string;
     designation: string;

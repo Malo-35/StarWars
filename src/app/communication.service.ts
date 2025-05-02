@@ -5,8 +5,10 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunicationService {
-  protected subject:Subject<string>= new Subject()
-  protected communicationDesPages:Subject<number> = new Subject()
+  protected subject:Subject<string>= new Subject();
+  protected communicationDesPages:Subject<number> = new Subject();
+  protected detailsSubject: Subject<string> = new Subject();
+  protected formulaire: Subject<string> = new Subject();
 
   constructor() { }
 
@@ -29,5 +31,25 @@ export class CommunicationService {
   //Permet d'écouter les communications du nombre total de pages.
   onPages(): Observable<number>{
     return this.communicationDesPages.asObservable();
+  }
+
+  //Cette section-ci est réservée à la communication des détails.
+  //Il y est transmit les données de l'objet à afficher sous format html.
+  pushDetails(sujet:any) {
+    //console.log("Envoit de la donnée suivante :\ncquoi : "+sujet.cquoi+"\nObjet complet : "+sujet)
+    this.detailsSubject.next(sujet);
+  }
+
+  onDetails(): Observable<string> {
+    return this.detailsSubject.asObservable();
+  }
+
+  //Ici je crée le channel pour la recherche globale.
+  pushForm(recherche:string){
+    this.formulaire.next(recherche);
+  }
+  
+  onForm(): Observable<string>{
+    return this.formulaire.asObservable();
   }
 }

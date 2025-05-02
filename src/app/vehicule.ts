@@ -1,4 +1,5 @@
 export interface Vehicule {
+    cquoi: string;
     name: string;
     model: string;
     manufacturer: string;

@@ -1,1 +1,301 @@
-<p>details works!</p>
+
+@if (madata != null) {
+    <!-- Affichage du message quand il n'y a rien -->
+    
+    @if (madata && madata.cquoi === 'Espece') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Classification : </strong> {{ madata.classification }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Espèce : </strong> {{ madata.designation }}</p>
+                            <p><strong>Hauteur moyenne : </strong> {{ madata.average_height }} cm</p>
+                            <p><strong>Couleur de peau : </strong> {{ madata.skin_colors }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Couleur des yeux : </strong> {{ madata.eye_colors }}</p>
+                            <p><strong>Couleur des cheveux : </strong> {{ madata.hair_colors }}</p>
+                            <p><strong>Langue : </strong> {{ madata.language }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    @else if (madata && madata.cquoi === 'Film') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.title }}</h2>
+                    <p><strong>Épisode : </strong> {{ madata.episode_id }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Réalisateur : </strong> {{ madata.director }}</p>
+                            <p><strong>Producteur : </strong> {{ madata.producer }}</p>
+                            <p><strong>Date de sortie : </strong> {{ madata.release_date }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Ouverture : </strong> {{ madata.opening_crawl }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Personnages</h3>
+                            <ul class="list-group">
+                                @for (character of madata.characters; track character) {
+                                    <li class="list-group-item">{{ character }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Planètes</h3>
+                            <ul class="list-group">
+                                @for (planet of madata.planets; track planet) {
+                                    <li class="list-group-item">{{ planet }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <!-- Affichage des détails du personnage -->
+    @else if (madata && madata.cquoi === 'Personnage') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Genre : </strong> {{ madata.gender }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Taille : </strong> {{ madata.height }} cm</p>
+                            <p><strong>Poids : </strong> {{ madata.mass }} kg</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Couleur des yeux : </strong> {{ madata.eye_color }}</p>
+                            <p><strong>Couleur des cheveux : </strong> {{ madata.hair_color }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Année de naissance : </strong> {{ madata.birth_year }}</p>
+                            <p><strong>Couleur de peau : </strong> {{ madata.skin_color }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Espèces</h3>
+                            <ul class="list-group">
+                                @for (species of madata.species; track species) {
+                                    <li class="list-group-item">{{ species }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    @else if (madata && madata.cquoi === 'Planete') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Période de rotation : </strong> {{ madata.rotation_period }} heures</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Période orbitale : </strong> {{ madata.orbital_period }} jours</p>
+                            <p><strong>Diamètre : </strong> {{ madata.diameter }} km</p>
+                            <p><strong>Climat : </strong> {{ madata.climate }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Gravité : </strong> {{ madata.gravity }}</p>
+                            <p><strong>Terrain : </strong> {{ madata.terrain }}</p>
+                            <p><strong>Eau de surface : </strong> {{ madata.surface_water }} %</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }    
+    
+    @else if (madata && madata.cquoi === 'Vaisseaux') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Modèle : </strong> {{ madata.model }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Fabricant : </strong> {{ madata.manufacturer }}</p>
+                            <p><strong>Longueur : </strong> {{ madata.length }} m</p>
+                            <p><strong>Vitesse max : </strong> {{ madata.max_atmosphering_speed }} km/h</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Capacité en passagers : </strong> {{ madata.passenger }}</p>
+                            <p><strong>Capacité de cargo : </strong> {{ madata.cargo_capacity }} kg</p>
+                            <p><strong>Classe de vaisseau : </strong> {{ madata.starship_class }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    
+    @else if (madata && madata.cquoi === 'Vehicule') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Modèle : </strong> {{ madata.model }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Fabricant : </strong> {{ madata.manufacturer }}</p>
+                            <p><strong>Longueur : </strong> {{ madata.length }} m</p>
+                            <p><strong>Vitesse max : </strong> {{ madata.max_atmosphering_speed }} km/h</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Capacité en passagers : </strong> {{ madata.passenger }}</p>
+                            <p><strong>Capacité de cargo : </strong> {{ madata.cargo_capacity }} kg</p>
+                            <p><strong>Classe de véhicule : </strong> {{ madata.vehicle_class }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @else if (madata && madata.cquoi === 'Vaisseau') {
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h2>{{ madata.name }}</h2>
+                    <p><strong>Modèle : </strong> {{ madata.model }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p><strong>Fabricant : </strong> {{ madata.manufacturer }}</p>
+                            <p><strong>Longueur : </strong> {{ madata.length }} m</p>
+                            <p><strong>Classe de véhicule : </strong> {{ madata.starship_class }}</p>
+                            <p><strong>Vitesse atmosphérique max : </strong> {{ madata.max_atmosphering_speed }} km/h</p>
+                            <p><strong>Vitesse espace max : </strong> {{ madata.MGLT }} (1MGLT = 3.6Km/h)</p>
+                            <p><strong>Classification de l'hyperdrive : </strong>{{madata.hyperdrive_rating}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><strong>Valeur monétaire : </strong>{{ madata.cost_in_credits }} crédits républicains</p>
+                            <p><strong>Équipage : </strong> {{ madata.crew }}</p>
+                            <p><strong>Capacité de cargo : </strong> {{ madata.cargo_capacity }} kg</p>
+                            <p><strong>Autonomie : </strong> {{ madata.consumables }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Films</h3>
+                            <ul class="list-group">
+                                @for (film of madata.films; track film) {
+                                    <li class="list-group-item">{{ film }}</li>
+                                }
+                            </ul>
+                            <h3>Pilots</h3>
+                            <ul class="list-group">
+                                @for (pilot of madata.pilots; track pilot) {
+                                    <li class="list-group-item">{{pilot}}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <!-- Affichage de l'erreur si cquoi n'est pas 'Personnage' -->
+    @else {
+        <div class="col-12">
+            <p>Erreur d'identification {{ madata?.cquoi }}</p>
+        </div>
+    }
+
+}

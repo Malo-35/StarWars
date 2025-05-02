@@ -1,1 +1,21 @@
-@for(car of listeVehicule; track car){}
+<!-- Affichage des véhicules -->
+<div class="d-flex w-100 flex-wrap">
+    @for(sujet of mylisteVehicule; track sujet){
+        <button class="col-3 d-flex justify-content-center flex-wrap p-1" (click)="clickDetails(sujet)">
+            <div class="d-flex justify-content-center flex-wrap" style="outline: 1px solid black;">
+                <div class="d-flex justify-content-center">{{ sujet.name }}</div>
+                <div class="d-flex justify-content-center">Modèle : {{ sujet.model }}</div>
+            </div>
+        </button>
+    }
+</div>
+
+<!-- Sélecteur de pages -->
+<div class="page-selector d-flex justify-content-center">
+    @for(page of pagesArray; track page){
+        <!-- La classe "active" peut être gérée via une notation conditionnelle en fonction de ton moteur de template -->
+        <button (click)="clickPage(page)" class="btn {{ page === pageactuelle ? 'btn-primary active' : '' }}">
+            {{ page }}
+        </button>
+    }
+</div>

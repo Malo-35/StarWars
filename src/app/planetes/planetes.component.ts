@@ -1,28 +1,94 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommunicationService } from '../communication.service';
 import { ApiserviceService } from '../apiservice.service';
 import { Planete } from '../planete';
 
 @Component({
   selector: 'app-planetes',
-  imports: [],
   templateUrl: './planetes.component.html',
-  styleUrl: './planetes.component.css'
+  styleUrls: ['./planetes.component.css']
 })
-export class PlanetesComponent implements OnInit {
-  commServ = inject(CommunicationService)   //Nécessaire à l'intallation des communications entre cette app et le header.
+export class PlanetesComponent {
+  // Injection des services nécessaires
+  commServ = inject(CommunicationService);    // Pour envoyer un message vers le header (image)
+  commDetails = inject(CommunicationService); // Pour envoyer les détails de la planète sélectionnée
+  
+  myapiservice = inject(ApiserviceService);  // Service pour interagir avec l'API
+  mylistePlanete = <any>[];                   // Tableau pour stocker la liste des planètes reçues
 
-  //Le nécessaire à la réception et stockage des planètes.
-  myapiservice = inject(ApiserviceService)  //Pour contacter l'API
-  malisteplanetes = <any>[]                 //Contient les planètes de la page actuelle
+  // Variables pour la pagination
+  totalCount: number = 0;                     // Nombre total de planètes disponibles dans l'API
+  totalPages: number = 0;                     // Nombre total de pages disponibles (20 pers/page)
+  pagesArray: number[] = [];                  // Tableau des numéros de pages pour le sélecteur
 
+  pageactuelle: number = 1;                    // Page actuellement affichée
 
-  ngOnInit(){
-    this.commServ.pushMessage("/planeteIcon.png")   //On envoie dans le channel quelle image afficher dans le header.
+  // Méthode appelée lors de l'initialisation du composant
+  ngOnInit(): void {
+    this.commServ.pushMessage("/planeteIcon.png");    // Envoie l'icône dans le header
 
-    this.myapiservice.getPlanetes(1).subscribe(
-      (data) => this.malisteplanetes = data
-    )
+    // Souscription pour recevoir les filtres du formulaire.
+        this.commServ.onForm().subscribe((searchTerm:string) => {
+          if (searchTerm && searchTerm.trim() !== '') {
+            //Retrait des pages :
+            this.totalCount = 0
+            this.totalPages = 0
+            this.pagesArray = []
+            // Appel de l'API avec le filtre.
+            this.myapiservice.getPlaneteFiltre(searchTerm).subscribe(
+              (data: Planete[]) => {
+                this.mylistePlanete = data;
+              },
+              error => console.error("Erreur lors de la recherche filtrée :", error)
+            );
+          } else {
+            // Si le filtre est vide, rechargez la liste par défaut (page 1 par exemple).
+            this.loadPlanetes(this.pageactuelle);
+          }
+        });
+
+    // Appel à l'API pour récupérer la première page de planètes
+    this.myapiservice.getPlanetesPage(1).subscribe(data => {
+      this.totalCount = data.count;  // Récupération du nombre total de planètes
+      const totalApiPages = Math.ceil(this.totalCount / 10); // Calcul du nombre total de pages (10 planètes/page)
+
+      if (totalApiPages % 2 === 0) {
+        this.totalPages = totalApiPages / 2;
+      } else {
+        this.totalPages = Math.floor(totalApiPages / 2) + 1;
+      }
+
+      // Création du tableau des numéros de pages à afficher
+      this.pagesArray = Array.from({ length: this.totalPages }, (v, i) => i + 1);
+    });
+
+    // Chargement des planètes pour la première page
+    this.loadPlanetes(this.pageactuelle);
   }
 
+  // Méthode pour charger les planètes pour une page donnée
+  loadPlanetes(page: number) {
+    this.myapiservice.getPlanetesByDisplayPage(page).subscribe(
+      (data) => this.mylistePlanete = data,  // Remplissage de la liste des planètes
+      error => console.error("Erreur lors du chargement des planètes :", error) // Gestion des erreurs
+    );
+  }
+
+  // Méthode appelée lors du clic sur un numéro de page
+  clickPage(page: number) {
+    this.pageactuelle = page;        // Mise à jour de la page actuelle
+    this.loadPlanetes(page);         // Chargement des planètes pour cette page
+  }
+
+  // Méthode appelée lors du clic sur une planète pour afficher ses détails
+  clickDetails(maPlanete: Planete){
+    console.log("Détail planète cliqué !\n" + maPlanete.climate);
+    this.commDetails.pushDetails(maPlanete);  // Envoi des détails de la planète au canal
+  }
+
+  // Méthode appelée lorsque le composant est détruit
+  ngOnDestroy(){
+    this.commDetails.pushDetails(null);  // Envoi d'un message vide pour réinitialiser les détails
+    console.log("Composant planètes détruit !");
+  }
 }

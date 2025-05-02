@@ -29,7 +29,7 @@
     bottom: -100px;
     width: 100%;
     transform-origin: 50% 100%;
-    animation: crawl 300s linear forwards;  /*La longueur de la musique est de 131 secondes*/
+    animation: crawl 600s linear forwards;  /*La longueur de la musique est de 131 secondes*/
   }
   
   @keyframes crawl {

@@ -1,31 +1,35 @@
 Il y a une musique de fond, je vous conseille de mettre le son.
 
-Les QUELQUES problème rencontrés :
-- Problème de non sauvegarde de l'image de la catégorie actuelle lors de l'actualisation de la page.
-- Problème d'accès à l'API qui a engendré une guerre sans précédent entre le professeur, l'API et le programme de près de 30 minutes. L'API fu vaincu grâce aux capacités et ressources redoutable du professeur.
+Les quelques problèmes rencontrés :
 
-- Une fois les requêtes possibles je me suis attelé à créer le programme pour les utiliser. Après beaucoup de débats intérieurs, j'en suis venu à la conclusion que chaque type de données doit être traité comme des données strictements disctinctes, me forçant à faire trois types de datas différentes (foreshadowing...) et à créer (seulement ?) trois fois les même fonctions mais calibré pour traiter un type de donné spécifique !
+- Problème de non-sauvegarde de l'image de la catégorie actuelle lors de l'actualisation de la page.
 
-- Problème de capacité de requêtes personnalisées à l'API. En effet, en allant sur swapi.tech et non pas swapi.dev j'ai observé une fonctionnalité fort sympathique qui était de donner le nombre d'éléments par page souhaité ainsi que la page voulue... Ce qui n'est pas possible avec l'API choisie originalement.
+- Problème d'accès à l'API qui a engendré une guerre sans précédent entre le professeur, l'API et le programme pendant près de 30 minutes. L'API fut vaincue grâce aux capacités et ressources redoutables du professeur.
 
-- J'ai remarqué qu'il y a plus que les trois types de données du début : Personnages, Planètes et Vaisseaux (Spatiaux). Il y a aussi les données des Véhicules (Planétaires), les Espèces et les Films...
-Ainsi j'ai du refaire tout le même cirque que pour les trois premières...
+- Une fois les requêtes possibles, je me suis attelé à créer le programme pour les utiliser. Après beaucoup de débats intérieurs, j'en suis venu à la conclusion que chaque type de données devait être traité comme des données strictement distinctes, me forçant à réaliser trois types de données différents (foreshadowing...) et à créer (seulement ?) trois fois les mêmes fonctions, mais calibrées pour traiter un type de donnée spécifique !
 
-- Un problème du volume de la musique que vous écoutez actuellement. Je peux vous assurer que mes thympans s'en souviennent... >:(
+- Problème de capacité des requêtes personnalisées à l'API. En effet, en allant sur swapi.tech et non pas sur swapi.dev, j'ai observé une fonctionnalité fort sympathique qui permet de définir le nombre d'éléments par page souhaité ainsi que la page voulue... Ce qui n'est pas possible avec l'API choisie initialement.
 
-- COMMENT ÇA MON SITE API EST COMPROMIS !? Oui, swapi.dev a apparement subit une attaque... je n'ai pas le droit d'y accéder avec mon navigateur !
-Fort heureusement, je peux toujours effectuer des requêtes dessus, c'est juste que si je me rate dans la commande, je ne peux pas voir l'orthographe du mot... Je suis dyslexique et dysorthographique !
-Mise à jour : le site semble toujours être compromis... Cela doit être due à mon navigateur qui ne veux plus que j'aille dessus pour protéger mes données. Mais bon, j'arrive à passer outre.
+- J'ai remarqué qu'il existe plus que les trois types de données initialement prévus : personnages, planètes et vaisseaux spatiaux. Il y a aussi les données des véhicules (planétaires), des espèces et des films... Ainsi, j'ai dû refaire tout le même cirque que pour les trois premiers.
 
-- Pour l'ajout d'un système de recherche avec un formulaire... Je ne l'ai pas encore fait au moment où j'écrit cette ligne mais je n'arrive toujours pas à bien me décider sur comment l'implanter...
-- Euh... j'en fait quoi de la page d'accueille ? Je n'ai pas 36 000 trucs à dire moi !
+- Un problème de volume de la musique que vous écoutez actuellement. Je peux vous assurer que mes tympans s'en souviennent... >:(
 
-- Ayant décidé de laisser l'affichage des détails par un autre composant, j'ai du passer par bien des techniques pour transmettre et afficher les différents types de données possibles. Après 2 heures de bataille, j'ai trouvé la solution pour pouvoir différentier les différents types de données, j'ai ajouté la variable "cquoi" qui renvoie son type de donnée... DU GÉNIE BARBARE !
+- COMMENT ÇA, MON SITE API EST COMPROMIS !? Oui, swapi.dev a apparemment subi une attaque... Je n'ai pas le droit d'y accéder avec mon navigateur ! Fort heureusement, je peux toujours effectuer des requêtes dessus, c'est juste que si je me trompe dans la commande, je ne peux pas voir l'orthographe du mot... Je suis dyslexique et dysorthographique !
+Mise à jour : le site semble toujours être compromis... Cela doit être dû à mon navigateur, qui ne veut plus que j'y aille pour protéger mes données. Mais bon, j'arrive à passer outre.
 
-- Un problème d'affichage des détails : quand j'essayais d'afficher les détails d'un objet / élément, la page des détails s'affichait mais n'affichait rien. Il fallait cliquer une fois pour activer les détails, puis cliquer une seconde fois pour afficher les détails de l'objet.
-- Le bouton qui affichait ce texte prenait, de base, tout l'écran. J'ai dû taper dessus, il est un peu limité maintenant mais il prend moins de place.
-- Vous savez à quel point il est difficile de trouver le fond d'étoiles utilisé dans les génériques de Star Wars ?
-Essayez et vous verrez, c'est donc pour cette raison que j'affirme à plus ou moins contre coeur que le fond utilisé n'est pas l'original (même si je le trouve l'image actuelle meilleure).
+- Pour l'ajout d'un système de recherche avec un formulaire... Je ne l'ai pas encore fait au moment où j'écris ces lignes, mais je n'arrive toujours pas à bien me décider sur la manière de l'implanter...
 
-- Impossibilité de revoir la commande pour chercher en appliquant un filtre sur l'API car elle est toujours menacée ! J'ai essayer sur d'autres navigateurs, en vain, avant d'envoyer un espion Chat-GPT pour faire de la récolte d'informations !
-La mise en place du formulaire de recherche est plus complexe que prévus, une fois qu'il ne reste que quelques objets, ces derniers se font écraser par une force inconnue et innarétable... Le stress peut-être ?
+- Euh... qu'est-ce que je fais de la page d'accueil ? Je n'ai pas 36 000 choses à dire, moi !
+
+- Ayant décidé de laisser l'affichage des détails à un autre composant, j'ai dû recourir à de nombreuses techniques pour transmettre et afficher les différents types de données possibles. Après 2 heures de bataille, j'ai trouvé la solution pour pouvoir différencier ces types de données : j'ai ajouté la variable "cquoi" qui renvoie leur type... DU GÉNIE BARBARE !
+
+- Problème d'affichage des détails : lorsque j'essayais d'afficher les détails d'un objet/élément, la page des détails s'affichait sans rien afficher. Il fallait cliquer une fois pour activer les détails, puis une seconde fois pour afficher les informations de l'objet.
+
+- Le bouton affichant ce texte occupait, par défaut, tout l'écran. J'ai dû le réduire ; il est un peu limité maintenant, mais il prend moins de place.
+
+- Vous savez à quel point il est difficile de trouver le fond d'étoiles utilisé dans les génériques de Star Wars ? Essayez, et vous verrez ! C'est donc pour cette raison que j'affirme, plus ou moins à contrecœur, que le fond utilisé n'est pas l'original (même si je trouve que l'image actuelle est meilleure).
+
+- Impossibilité de revoir la commande pour rechercher en appliquant un filtre sur l'API, car elle est toujours menacée ! J'ai essayé sur d'autres navigateurs, en vain, avant d'envoyer un espion Chat-GPT pour récolter des informations !
+- La mise en place du formulaire de recherche est plus complexe que prévu : une fois qu'il ne reste que quelques objets, ces derniers se font écraser par une force inconnue et inarrêtable... Le stress, peut-être ?
+
+- Le temps commence cruellement à me manquer : j'ai rapidement terminé ma page d'accueil, mais je regrette de ne pas pouvoir améliorer certaines fonctionnalités...

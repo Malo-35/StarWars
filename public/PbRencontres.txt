@@ -14,7 +14,7 @@ Les quelques problèmes rencontrés :
 
 - Un problème de volume de la musique que vous écoutez actuellement. Je peux vous assurer que mes tympans s'en souviennent... >:(
 
-- COMMENT ÇA, MON SITE API EST COMPROMIS !? Oui, swapi.dev a apparemment subi une attaque... Je n'ai pas le droit d'y accéder avec mon navigateur ! Fort heureusement, je peux toujours effectuer des requêtes dessus, c'est juste que si je me trompe dans la commande, je ne peux pas voir l'orthographe du mot... Je suis dyslexique et dysorthographique !
+- COMMENT ÇA, MON SITE API EST COMPROMISE !? Oui, swapi.dev a apparemment subi une attaque... Je n'ai pas le droit d'y accéder avec mon navigateur ! Fort heureusement, je peux toujours effectuer des requêtes dessus, c'est juste que si je me trompe dans la commande, je ne peux pas voir l'orthographe du mot... Je suis dyslexique et dysorthographique !
 Mise à jour : le site semble toujours être compromis... Cela doit être dû à mon navigateur, qui ne veut plus que j'y aille pour protéger mes données. Mais bon, j'arrive à passer outre.
 
 - Pour l'ajout d'un système de recherche avec un formulaire... Je ne l'ai pas encore fait au moment où j'écris ces lignes, mais je n'arrive toujours pas à bien me décider sur la manière de l'implanter...
